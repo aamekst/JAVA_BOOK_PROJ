@@ -6,32 +6,37 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
-
 @Entity
-@Table(name = "Usuario", schema = "dbo")
+@Table(name = "Autor", schema = "dbo")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class UserEntity {
+public class AutorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", unique = true)
     private Integer Id;
 
-    @Column(name = "username", unique = true)
+    @Column(name = "Nome")
     private String Nome;
 
-    @Column(name = "email", unique = true)
-    private String email;
+    public Integer getId() {
+        return Id;
+    }
 
-    @Column(name = "senha")
-    private String Senha;
+    public void setId(Integer id) {
+        Id = id;
+    }
 
-    //@OneToMany(mappedBy = "usuario")
-    //private Set<LivroEntity> livros;
+    public String getNome() {
+        return Nome;
+    }
+
+    public void setNome(String nome) {
+        Nome = nome;
+    }
 }
 
 

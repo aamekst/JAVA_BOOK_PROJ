@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'Magic Retro';
+    src: url('/fonts/magic/Magic_Retro.ttf') format('truetype');
+}
+
+/* Para a fonte Stora Light */
+@font-face {
+    font-family: 'Stora';
+    src: url('/fonts/stora/Stora.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'rolner';
+    src: url('/fonts/rolner/ROLNER.otf') format('opentype');
+}

@@ -1,30 +1,85 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i');
-*{
+
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-body{
+
+body {
     font-family: 'PT Sans', sans-serif;
-    background-color: #000;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
-.card{
-    position: absolute;
-    top: 50%;
-    left: 50%;
+
+.container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.form-container {
+    padding: 20px;
+    flex: 1;
+    border-right: 1px solid #ddd;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-group button:hover {
+    background-color: #45a049;
+}
+
+.card {
     width: 300px;
     height: 400px;
     background-color: #FFF;
     transform-style: preserve-3d;
-    transform: translate(-50%, -50%) perspective(2000px);
+    transform: perspective(2000px);
     box-shadow: inset 300px 0 50px rgba(0,0,0,0.5), 0 20px 100px rgba(0,0,0,0.5);
     transition: 1s;
 }
-.card:hover{
-    transform: translate(-50%,-50%) perspective(2000px) rotate(-10deg);
+
+.card:hover {
+    transform: rotate(-10deg) perspective(2000px);
     box-shadow: inset 20px 0 50px rgba(0,0,0,0.5), 0 10px 100px rgba(0,0,0,0.5);
 }
-.card:before{
+
+.card:before {
     content: "";
     position: absolute;
     top: -5px;
@@ -35,7 +90,8 @@ body{
     transform-origin: bottom;
     transform: skewX(-45deg);
 }
-.card:after{
+
+.card:after {
     content: "";
     position: absolute;
     top: 0;
@@ -46,22 +102,26 @@ body{
     transform-origin: left;
     transform: skewY(-45deg);
 }
-.imgBox img{
+
+.imgBox img {
     width: 100%;
-    height: 400px;
+    height: 100%;
     object-fit: cover;
 }
-.card .imgBox{
+
+.card .imgBox {
     width: 100%;
     height: 100%;
     position: relative;
     transform-origin: left;
     transition: 1s cubic-bezier(.15,1.7,.84,.58);
 }
-.card:hover .imgBox{
+
+.card:hover .imgBox {
     transform: rotateY(-135deg);
 }
-.card .details{
+
+.card .details {
     position: absolute;
     top: 0;
     left: 0;
@@ -69,6 +129,32 @@ body{
     padding: 20px;
     z-index: -1;
 }
+
 .card .details h2 {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
+.card-buttons {
+    padding: 10px;
+    /* Espaçamento interno */
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-left: -119px;
+}
+.button-link {
+    background: red;
+    margin-left: -51px;
+    height: 40px; /* Aumenta a altura do botão */
+    width: 150px; /* Aumenta a largura do botão */
+    text-decoration: none;
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    display: flex;       /* Usado para centralizar o texto */
+    justify-content: center; /* Centraliza horizontalmente o texto */
+    align-items: center; /* Centraliza verticalmente o texto */
+    color: white;        /* Cor do texto */
+    font-size: 16px;     /* Tamanho da fonte */
+    text-align: center;  /* Centraliza o texto dentro do botão */
+    padding: 0 15px;    /* Padding interno adicional, se necessário */
+}
+
