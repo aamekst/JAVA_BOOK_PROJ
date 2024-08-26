@@ -2,41 +2,74 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Cadastro de Livro</title>
+    <link rel="stylesheet" href="/livro.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<h1>Cadastrar Livro</h1>
+<body style="background-color: #f3fcee">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F9E1DD;">
+    <a class="navbar-brand navbar-brand-custom" href="/api/home" style="font-family: 'Stora'; color: white;  letter-spacing: 3px;  text-shadow: -1px -1px 0 #ee5e5b, 2px -2px 0 #ee5e5b, -2px 2px 0 #ee5e5b, 2px 2px 0 #ee5e5b;">BookCASE</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/api/cadastrar" style="font-family: 'rolner'; color: #3D5C30">Cadastrar Avaliação</a>
+        </div>
+    </div>
+</nav>
 
-<!-- Mensagem de sucesso ou erro -->
-<div th:if="${mensagem}" th:text="${mensagem}" style="color:green;"></div>
-<div th:if="${erro}" th:text="${erro}" style="color:red;"></div>
+<div class="container mt-4">
+    <h1 class="mb-4" style="font-family: 'Stora'; color:  #3D5C30">Cadastrar Livro</h1>
 
-<form th:action="@{/api/livros}" th:object="${livroRequestDto}" method="post">
-    <label for="nome">Nome do Livro:</label>
-    <input type="text" id="nome" th:field="*{nome}" required /><br/>
+    <!-- Mensagem de sucesso ou erro -->
+    <div th:if="${mensagem}" th:text="${mensagem}" class="alert alert-success" role="alert"></div>
+    <div th:if="${erro}" th:text="${erro}" class="alert alert-danger" role="alert"></div>
 
-    <label for="numero_paginas">Número de Páginas:</label>
-    <input type="number" id="numero_paginas" th:field="*{numero_paginas}" required /><br/>
+    <!-- Card com formulário -->
+    <div class="card" style="font-family: 'rolner'">
+        <div class="card-body">
+            <form th:action="@{/api/livros}" th:object="${livroRequestDto}" method="post">
+                <div class="form-group">
+                    <label for="nome">Nome do Livro:</label>
+                    <input type="text" class="form-control" id="nome" th:field="*{nome}" required />
+                </div>
+                <div class="form-group">
+                    <label for="numero_paginas">Número de Páginas:</label>
+                    <input type="number" class="form-control" id="numero_paginas" th:field="*{numero_paginas}" required />
+                </div>
+                <div class="form-group">
+                    <label for="data_publicacao">Data de Publicação:</label>
+                    <input type="date" class="form-control" id="data_publicacao" th:field="*{data_publicacao}" required />
+                </div>
+                <div class="form-group">
+                    <label for="url_foto">URL da Foto:</label>
+                    <input type="text" class="form-control" id="url_foto" th:field="*{urlFoto}" />
+                </div>
+                <div class="form-group">
+                    <label for="autor">Autor:</label>
+                    <select id="autor" class="form-control" th:field="*{idAutor}">
+                        <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nome}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editora">Editora:</label>
+                    <select id="editora" class="form-control" th:field="*{idEditora}">
+                        <option th:each="editora : ${editoras}" th:value="${editora.id}" th:text="${editora.nome}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="descricao">Descrição:</label>
+                    <textarea id="descricao" class="form-control" th:field="*{descricao}" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="background: #ee5e5b">Cadastrar</button>
 
-    <label for="data_publicacao">Data de Publicação:</label>
-    <input type="date" id="data_publicacao" th:field="*{data_publicacao}" required /><br/>
+            </form>
+        </div>
+    </div>
+</div>
 
-    <label for="url_foto">URL da Foto:</label>
-    <input type="text" id="url_foto" th:field="*{urlFoto}" /><br/>
-
-    <label for="autor">Autor:</label>
-    <select id="autor" th:field="*{idAutor}">
-        <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nome}"></option>
-    </select><br/>
-
-    <label for="editora">Editora:</label>
-    <select id="editora" th:field="*{idEditora}">
-        <option th:each="editora : ${editoras}" th:value="${editora.id}" th:text="${editora.nome}"></option>
-    </select><br/>
-
-    <label for="descricao">Descrição:</label>
-    <textarea id="descricao" th:field="*{descricao}" required></textarea><br/>
-
-    <button type="submit">Cadastrar</button>
-</form>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

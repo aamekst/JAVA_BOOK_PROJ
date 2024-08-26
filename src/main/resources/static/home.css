@@ -13,3 +13,38 @@
     font-family: 'rolner';
     src: url('/fonts/rolner/ROLNER.otf') format('opentype');
 }
+
+
+.container {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between; /* Espaçamento entre as divs */
+    align-items: left; /* Centraliza verticalmente */
+    padding: 10px;
+}
+
+.content-left {
+    flex: 1;
+    padding-right: 150px; /* Espaçamento à direita */
+}
+
+.content-right img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-left: 800px
+    border-radius: 8px; /* Arredonda as bordas da imagem */
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .content-left {
+        padding-right: 0;
+        margin-bottom: 20px; /* Espaçamento entre as divs empilhadas */
+    }
+}
