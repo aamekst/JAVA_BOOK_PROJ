@@ -9,7 +9,6 @@ import com.library.ms.domain.repository.AutorRepository;
 import com.library.ms.domain.repository.EditoraRepository;
 import com.library.ms.domain.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -69,5 +68,11 @@ public class LivroServiceImpl implements LivroServiceInterface {
 
         // Retornando o DTO de resposta
         return livroResponseDto;
+    }
+
+
+    @Override
+    public LivroEntity buscarPorId(Integer id) {
+        return (LivroEntity) livroRepository.findById(id).orElse(null);
     }
 }

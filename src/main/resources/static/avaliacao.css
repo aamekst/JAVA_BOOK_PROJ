@@ -1,0 +1,80 @@
+@font-face {
+    font-family: 'Magic Retro';
+    src: url('/fonts/magic/Magic_Retro.ttf') format('truetype');
+}
+
+/* Para a fonte Stora Light */
+@font-face {
+    font-family: 'Stora';
+    src: url('/fonts/stora/Stora.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'rolner';
+    src: url('/fonts/rolner/ROLNER.otf') format('opentype');
+}
+
+.avaliacao-card {
+    width: 250px; /* Define a largura dos cards */
+    margin-bottom: 20px;
+    margin-left: 50px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    justify-content: space-around;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo do card */
+}
+
+.avaliacao-card:hover {
+    transform: scale(1.05);
+}
+
+.avaliacao-card img {
+    width: 100%;
+    height: 150px; /* Ajusta a altura da imagem */
+    object-fit: cover;
+}
+
+.avaliacao-card .card-body {
+    padding: 15px;
+    text-align: left; /* Centraliza o texto dentro do card */
+}
+
+.avaliacao-card h3 {
+    margin-top: 0;
+    font-size: 1.2rem; /* Ajusta o tamanho do texto */
+}
+
+.avaliacao-card p {
+    margin: 5px 0;
+}
+
+.avaliacao-card .nota {
+    font-weight: bold;
+    color: #28a745; /* Green color */
+}
+
+.header-title {
+    font-family: 'Stora', sans-serif;
+    color: #3D5C30;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.container {
+    padding-top: 10px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    display: flex; /* Adiciona o layout flexível */
+    flex-wrap: wrap; /* Permite que os cards se ajustem e quebrem a linha */
+    justify-content: center; /* Centraliza os cards horizontalmente */
+    gap: 20px; /* Adiciona espaçamento entre os cards */
+}

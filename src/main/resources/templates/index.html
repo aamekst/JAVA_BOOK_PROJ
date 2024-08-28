@@ -28,6 +28,9 @@
                             const imagemUrl = livro.url_foto ? livro.url_foto : '';
                             console.log('URL da imagem:', imagemUrl); // Verifique o valor da URL
                             $('#livroImagem').attr('src', imagemUrl); // Atualizar com URL da foto
+
+                            // Armazenar o ID do livro em um campo oculto
+                            $('#livroId').val(livro.id);
                         } else {
                             // Limpar os campos se nenhum livro for encontrado
                             $('#autor').val('');
@@ -35,6 +38,9 @@
                             $('#data_publicacao').val('');
                             $('#numero_paginas').val('');
                             $('#livroImagem').attr('src', ''); // Limpar a imagem
+
+                            // Limpar o ID do livro
+                            $('#livroId').val('');
                         }
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
@@ -61,7 +67,37 @@
             const comentario = $('#comentario').val();
 
             $('#notaExibida').text(`Nota: ${nota}`);
-            $('#comentarioExibido').text(` ${comentario}`);
+            $('#comentarioExibido').text(`Comentário: ${comentario}`);
+        }
+
+        function salvarAvaliacao() {
+            const livroId = $('#livroId').val();
+            const nota = $('#nota').val();
+            const comentario = $('#comentario').val();
+
+            if (!livroId) {
+                alert('Por favor, selecione um livro.');
+                return;
+            }
+
+            $.ajax({
+                url: '/api/avaliacoes', // Ajuste o caminho do endpoint conforme necessário
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    id: livroId,
+                    nota: nota,
+                    comentario: comentario
+                }),
+                success: function(response) {
+                    alert('Avaliação salva com sucesso!');
+                    atualizarDetalhes();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Erro ao salvar a avaliação:', textStatus, errorThrown);
+                    alert('Erro ao salvar a avaliação.');
+                }
+            });
         }
     </script>
 </head>
@@ -77,6 +113,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link" href="/api/livros/cadastrar" style="font-family: 'rolner'; color: #3D5C30">Cadastrar livro</a>
+            <a class="nav-item nav-link" href="/api/avaliacao" style="font-family: 'rolner'; color: #3D5C30">Livros</a>
         </div>
     </div>
 </nav>
@@ -115,9 +152,9 @@
                 <label for="comentario">Comentário:</label>
                 <textarea id="comentario" name="comentario"></textarea>
             </div>
-            <button type="button" class="btn btn-success" onclick="atualizarDetalhes()">Salvar</button>
+            <input type="hidden" id="livroId" name="livroId">
+            <button type="button" class="btn btn-success" onclick="salvarAvaliacao()">Salvar</button>
             <button type="reset" class="btn btn-danger" onclick="atualizarDetalhes()">Limpar</button>
-
         </form>
     </div>
 
@@ -129,7 +166,7 @@
         <div class="details">
             <h2>ANOTAÇÕES</h2>
             <p id="notaExibida">Nota: </p>
-            <p id="comentarioExibido"> </p>
+            <p id="comentarioExibido">Comentário: </p>
         </div>
     </div>
     <div class="card-buttons">

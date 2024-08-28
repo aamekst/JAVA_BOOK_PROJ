@@ -16,16 +16,43 @@ import lombok.Setter;
 public class AvaliacaoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", unique = true)
-    private Integer Id;
-
-    @Column(name = "Nota")
-    private String Nota;
-
-    @Column(name = "Comentario")
-    private String Comentario;
+    private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "Id_Livros")
     private LivroEntity livro;
+
+    private String nota;
+    private String comentario;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public LivroEntity getLivro() {
+        return livro;
+    }
+
+    public void setLivro(LivroEntity livro) {
+        this.livro = livro;
+    }
+
+    public String getNota() {
+        return nota;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
 }

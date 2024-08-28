@@ -16,4 +16,5 @@ public class LivroService {
     public List<LivroEntity> buscarPorNome(String nome) {
         return livroRepository.findByNomeContainingIgnoreCase(nome);
     }
+
 }
