@@ -3,6 +3,7 @@ package com.library.ms.domain.service;
 import com.library.ms.domain.dto.Reponse.LivroResponseDto;
 import com.library.ms.domain.dto.Request.LivroRequestDto;
 import com.library.ms.domain.entity.AutorEntity;
+import com.library.ms.domain.entity.AvaliacaoEntity;
 import com.library.ms.domain.entity.EditoraEntity;
 import com.library.ms.domain.entity.LivroEntity;
 import com.library.ms.domain.repository.AutorRepository;
@@ -10,6 +11,8 @@ import com.library.ms.domain.repository.EditoraRepository;
 import com.library.ms.domain.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class LivroServiceImpl implements LivroServiceInterface {
@@ -75,4 +78,10 @@ public class LivroServiceImpl implements LivroServiceInterface {
     public LivroEntity buscarPorId(Integer id) {
         return (LivroEntity) livroRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public List<LivroEntity> listarTodosLivros() {
+        return livroRepository.findAll();
+    }
+
 }

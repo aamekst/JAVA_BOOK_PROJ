@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Livros</title>
+    <link rel="stylesheet" href="/consultalivro.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color: #f3fcee">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F9E1DD; box-shadow: black">
+    <a class="navbar-brand navbar-brand-custom" href="/api/home" style="font-family: 'Stora'; color: white; letter-spacing: 3px; text-shadow: -1px -1px 0 #ee5e5b, 2px -2px 0 #ee5e5b, -2px 2px 0 #ee5e5b, 2px 2px 0 #ee5e5b;">
+        BookCASE
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/api/cadastrar" style="font-family: 'rolner'; color: #3D5C30">Cadastrar Avaliação</a>
+            <a class="nav-item nav-link" href="/api/livros/cadastrar" style="font-family: 'rolner'; color: #3D5C30">Cadastrar livro</a>
+        </div>
+    </div>
+    <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" style="background-color: #3D5C30; color: white" type="submit">Search</button>
+    </form>
+</nav>
+
+<div>
+    <h1 class="mb-4" style="font-family: 'Stora'; color: #3D5C30; text-align: center; margin-top: 50px">Livros</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- Loop para exibir livros -->
+        <div th:each="livro : ${livros}" class="col-md-4 mb-4" style="border-radius: 20px">
+            <div class="avaliacao-card card" style="border-radius: 20px">
+                <img th:src="${livro.url_foto}" alt="Imagem do Livro" class="card-img-top" style="border-radius: 20px">
+                <div class="card-body">
+                    <h3 th:text="${livro.nome}">Nome do Livro</h3>
+                    <p><strong>Autor:</strong> <span th:text="${livro.autor?.nome}">Nome do Autor</span></p>
+                    <p><strong>Editora:</strong> <span th:text="${livro.editora?.nome}">Nome da Editora</span></p>
+                </div>
+            </div>
+        </div>
+        <!-- Fim do loop -->
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

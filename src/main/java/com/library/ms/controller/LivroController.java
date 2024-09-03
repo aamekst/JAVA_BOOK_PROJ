@@ -3,6 +3,7 @@ package com.library.ms.controller;
 import com.library.ms.domain.dto.Reponse.LivroResponseDto;
 import com.library.ms.domain.dto.Request.AvaliacaoRequestDto;
 import com.library.ms.domain.dto.Request.LivroRequestDto;
+import com.library.ms.domain.entity.AvaliacaoEntity;
 import com.library.ms.domain.entity.LivroEntity;
 import com.library.ms.domain.repository.AutorRepository;
 import com.library.ms.domain.repository.EditoraRepository;
@@ -33,6 +34,7 @@ public class LivroController {
         return "index";
     }
 
+
     @Autowired
     private LivroService livroService;
     @Autowired
@@ -41,6 +43,13 @@ public class LivroController {
     private final AutorRepository autorRepository;
     @Autowired
     private final EditoraRepository editoraRepository;
+
+    @GetMapping("/consultar")
+    public String listarLivros(Model model) {
+        List<LivroEntity> livros = livroServiceInterface.listarTodosLivros();
+        model.addAttribute("livros", livros);
+        return "consultar"; // Nome do template Thymeleaf
+    }
 
 
     @GetMapping("/buscarLivros")
