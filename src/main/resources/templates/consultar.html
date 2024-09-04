@@ -18,10 +18,11 @@
         <div class="navbar-nav">
             <a class="nav-item nav-link" href="/api/cadastrar" style="font-family: 'rolner'; color: #3D5C30">Cadastrar Avaliação</a>
             <a class="nav-item nav-link" href="/api/livros/cadastrar" style="font-family: 'rolner'; color: #3D5C30">Cadastrar livro</a>
+            <a class="nav-item nav-link" href="/api/avaliacao" style="font-family: 'rolner'; color: #3D5C30">Avaliações</a>
         </div>
     </div>
-    <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" action="/api/buscarPorNome" method="get">
+        <input class="form-control mr-sm-2" type="search" name="nome" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" style="background-color: #3D5C30; color: white" type="submit">Search</button>
     </form>
 </nav>

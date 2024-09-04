@@ -12,4 +12,7 @@ public interface LivroServiceInterface {
     LivroEntity buscarPorId(Integer id);
 
     List<LivroEntity> listarTodosLivros();
+
+    List<LivroEntity> buscarPorNome(String nome);
+
 }

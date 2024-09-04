@@ -3,7 +3,6 @@ package com.library.ms.domain.service;
 import com.library.ms.domain.dto.Reponse.LivroResponseDto;
 import com.library.ms.domain.dto.Request.LivroRequestDto;
 import com.library.ms.domain.entity.AutorEntity;
-import com.library.ms.domain.entity.AvaliacaoEntity;
 import com.library.ms.domain.entity.EditoraEntity;
 import com.library.ms.domain.entity.LivroEntity;
 import com.library.ms.domain.repository.AutorRepository;
@@ -82,6 +81,11 @@ public class LivroServiceImpl implements LivroServiceInterface {
     @Override
     public List<LivroEntity> listarTodosLivros() {
         return livroRepository.findAll();
+    }
+
+    @Override
+    public List<LivroEntity> buscarPorNome(String nome) {
+        return livroRepository.findByNomeContainingIgnoreCase(nome);
     }
 
 }

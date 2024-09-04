@@ -90,5 +90,17 @@ public class LivroController {
      //   return livroServiceInterface.save(livroRequestDto);
     //}
 
+    @GetMapping("/buscarPorNome")
+    public String buscarPorNome(@RequestParam("nome") String nome, Model model) {
+        List<LivroEntity> livros = livroServiceInterface.buscarPorNome(nome);
+        model.addAttribute("livros", livros);
+        return "consultar";  // Nome do template Thymeleaf
+    }
+
+
+
+
+
+
 }
 

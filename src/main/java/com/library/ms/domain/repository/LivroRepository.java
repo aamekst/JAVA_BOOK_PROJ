@@ -16,9 +16,11 @@ import org.springframework.stereotype.Repository;
 public interface LivroRepository<Livro> extends JpaRepository<LivroEntity, Integer> {
 
     @Query("SELECT l FROM LivroEntity l WHERE LOWER(l.nome) LIKE LOWER(CONCAT('%', :nome, '%'))")
+
     List<LivroEntity> findByNomeContainingIgnoreCase(String nome);
 
     Optional<LivroEntity> findByNome(String nome);
 
     boolean existsByNomeAndAutorId(String nome, Integer idAutor);
+
 }
