@@ -46,3 +46,10 @@ CREATE TABLE Avaliacao(
 	FOREIGN KEY (Id_Livros) REFERENCES Livros(Id)
 
 );
+
+
+CREATE TABLE Status(
+    Id INT IDENTITY(1,1),
+    Status varchar(10)
+
+)
