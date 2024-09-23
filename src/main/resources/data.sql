@@ -40,7 +40,7 @@ CREATE TABLE Avaliacao(
 	Id INT IDENTITY(1,1),
 	Nota char(1),
 	Comentario varchar(255),
-	Id_Livros int NOT NULL,
+	Livro_Id int NOT NULL,
 
 	PRIMARY KEY (Id),
 	FOREIGN KEY (Id_Livros) REFERENCES Livros(Id)
