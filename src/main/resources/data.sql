@@ -25,7 +25,7 @@ CREATE TABLE Livros(
 	Id_Autor int NOT NULL,
 	Id_Editora int NOT NULL,
 	Data_publicacao char(8),
-	Descricao varchar(1000) NOT NULL,
+	Descricao varchar(max) NOT NULL,
 	numero_paginas varchar(10) NOT NULL,
 	Url_foto nvarchar(500) NOT NULL,
 	--Id_user int NOT NULL,

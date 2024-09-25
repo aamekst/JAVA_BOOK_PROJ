@@ -31,7 +31,7 @@
             </li>
         </div>
     </div>
-    <form class="form-inline my-2 my-lg-0" action="/buscarPorNome" method="get">
+    <form class="form-inline my-2 my-lg-0" action="/api/buscarPorNome" method="get">
         <input class="form-control mr-sm-2" type="search" name="nome" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" style="background-color: #3D5C30; color: white" type="submit">Search</button>
     </form>
@@ -51,6 +51,9 @@
                     <h3 th:text="${livro.nome}">Nome do Livro</h3>
                     <p><strong>Autor:</strong> <span th:text="${livro.autor?.nome}">Nome do Autor</span></p>
                     <p><strong>Editora:</strong> <span th:text="${livro.editora?.nome}">Nome da Editora</span></p>
+                    <a href="https://www.exemplo.com" class="custom-button" >
+                        <img src="/image/lapis.png" alt="Editar" style="width: 20px; height: 20px; margin-left: 190px">
+                    </a>
                 </div>
             </div>
         </div>
