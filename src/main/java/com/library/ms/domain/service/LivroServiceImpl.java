@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LivroServiceImpl implements LivroServiceInterface {
@@ -87,5 +88,59 @@ public class LivroServiceImpl implements LivroServiceInterface {
     public List<LivroEntity> buscarPorNome(String nome) {
         return livroRepository.findByNomeContainingIgnoreCase(nome);
     }
+
+
+    @Override
+    public LivroResponseDto atualizar(Integer id, LivroRequestDto livroRequestDto) {
+        // Verifica se o ID é nulo
+        if (id == null) {
+            throw new IllegalArgumentException("O ID do livro não pode ser nulo.");
+        }
+
+        // Busca o livro pelo ID
+        Optional<LivroEntity> optionalLivro = livroRepository.findById(id);
+
+        // Verifica se o livro existe
+        if (!optionalLivro.isPresent()) {
+            throw new RuntimeException("Livro não encontrado com o ID: " + id);
+        }
+
+        LivroEntity exist = optionalLivro.get(); // Pega o LivroEntity
+
+        // Atualiza os dados do livro
+        exist.setNome(livroRequestDto.getNome());
+        exist.setData_publicacao(livroRequestDto.getData_publicacao());
+        exist.setDescricao(livroRequestDto.getDescricao());
+        exist.setNumero_paginas(livroRequestDto.getNumero_paginas());
+        exist.setUrl_foto(livroRequestDto.getUrlFoto());
+
+        // Atualiza autor
+        AutorEntity autor = autorRepository.findById(livroRequestDto.getIdAutor())
+                .orElseThrow(() -> new RuntimeException("Autor não encontrado com o ID: " + livroRequestDto.getIdAutor()));
+        exist.setAutor(autor);
+
+        // Atualiza editora
+        EditoraEntity editora = editoraRepository.findById(livroRequestDto.getIdEditora())
+                .orElseThrow(() -> new RuntimeException("Editora não encontrada com o ID: " + livroRequestDto.getIdEditora()));
+        exist.setEditora(editora);
+
+        // Salva o livro atualizado
+        LivroEntity savedLivro = (LivroEntity) livroRepository.save(exist);
+
+        // Cria e retorna o DTO de resposta
+        LivroResponseDto livroResponseDto = new LivroResponseDto();
+        livroResponseDto.setId(savedLivro.getId());
+        livroResponseDto.setNome(savedLivro.getNome());
+        livroResponseDto.setDescricao(savedLivro.getDescricao());
+        livroResponseDto.setNumero_paginas(savedLivro.getNumero_paginas());
+        livroResponseDto.setNomeAutor(savedLivro.getAutor().getNome());
+        livroResponseDto.setNomeEditora(savedLivro.getEditora().getNome());
+
+        return livroResponseDto;
+    }
+
+
+
+
 
 }

@@ -1,7 +1,5 @@
 package com.library.ms.domain.dto.Reponse;
 
-import com.library.ms.domain.entity.AutorEntity;
-import com.library.ms.domain.entity.EditoraEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -42,7 +40,7 @@ public class LivroResponseDto {
         this.data_publicacao = data_publicacao;
     }
 
-    public String getNomeEditora() {
+    public String getNomeEditora(String nome) {
         return nomeEditora;
     }
 

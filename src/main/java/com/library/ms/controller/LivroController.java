@@ -98,6 +98,35 @@ public class LivroController {
     }
 
 
+    @GetMapping("/livro/editar/{id}")
+    public String mostrarFormularioAtualizacao(@PathVariable Integer id, Model model) {
+        LivroEntity livro = livroServiceInterface.buscarPorId(id);  // Busca o livro pelo ID
+        if (livro == null) {
+            return "redirect:/api/consultar"; // Redireciona se o livro não for encontrado
+        }
+
+        // Adiciona o livro ao modelo para que os dados possam ser exibidos no formulário
+        model.addAttribute("livro", livro);
+        model.addAttribute("autores", autorRepository.findAll()); // Adiciona a lista de autores
+        model.addAttribute("editoras", editoraRepository.findAll()); // Adiciona a lista de editoras
+
+        return "atualiza_avaliacao";  // Retorna o nome do template Thymeleaf
+    }
+
+
+
+    @PostMapping("/livro/atualizar/{id}")
+    public String atualizar(@PathVariable Integer id, @ModelAttribute LivroRequestDto livroRequestDto) {
+        livroRequestDto.setId(id); // Define o ID do DTO a partir do PathVariable
+        try {
+            livroServiceInterface.atualizar(id, livroRequestDto); // Chama o método de atualização
+            return "redirect:/api/consultar"; // Redireciona para a página de consulta
+        } catch (RuntimeException e) {
+            return "redirect:/api/consultar?erro=" + e.getMessage(); // Redireciona com mensagem de erro
+        }
+    }
+
+
 
 
 

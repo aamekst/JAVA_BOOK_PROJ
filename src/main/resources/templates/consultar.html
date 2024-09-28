@@ -51,7 +51,7 @@
                     <h3 th:text="${livro.nome}">Nome do Livro</h3>
                     <p><strong>Autor:</strong> <span th:text="${livro.autor?.nome}">Nome do Autor</span></p>
                     <p><strong>Editora:</strong> <span th:text="${livro.editora?.nome}">Nome da Editora</span></p>
-                    <a href="https://www.exemplo.com" class="custom-button" >
+                    <a th:href="@{/api/livro/editar/{id}(id=${livro.id})}" class="custom-button">
                         <img src="/image/lapis.png" alt="Editar" style="width: 20px; height: 20px; margin-left: 190px">
                     </a>
                 </div>

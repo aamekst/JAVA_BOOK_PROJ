@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Lista de Avaliações</title>
-    <link rel="stylesheet" href="/avaliacao.css">
+    <title>Atualizar Livro</title>
+
+    <link rel="stylesheet" href="/consultalivro.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body style="background-color: #f3fcee">
+<body>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F9E1DD;">
     <a class="navbar-brand navbar-brand-custom" href="/api/home" style="font-family: 'Stora'; color: white;  letter-spacing: 3px;  text-shadow: -1px -1px 0 #ee5e5b,
         2px -2px 0 #ee5e5b,
@@ -31,40 +31,58 @@
             </li>
         </div>
     </div>
-    <form class="form-inline my-2 my-lg-0" action="/buscarPorNome" method="get">
+    <form class="form-inline my-2 my-lg-0" action="/api/buscarPorNome" method="get">
         <input class="form-control mr-sm-2" type="search" name="nome" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" style="background-color: #3D5C30; color: white" type="submit">Search</button>
     </form>
 </nav>
-<div>
-    <h1 class="mb-4" style="font-family: 'Stora'; color:  #3D5C30; text-align: center; margin-top: 50px">Avaliações</h1>
-</div>
-<div class="container">
-    <div class="header-title">
-    </div>
-    <div class="row">
-        <!-- Loop para exibir avaliações -->
-        <!-- Supondo que você esteja usando Thymeleaf para renderizar as avaliações -->
-        <div th:each="avaliacao : ${avaliacoes}" class="col-md-4 mb-4" style="border-radius: 20px">
-            <div class="avaliacao-card card" style="border-radius: 20px">
-                <img th:src="@{${avaliacao.livro.url_foto}}" alt="Imagem do Livro">
-                <div class="card-body">
-                    <h3 th:text="${avaliacao.livro.nome}">Nome do Livro</h3>
-                    <p class="nota" th:text="'Nota: ' + ${avaliacao.nota}">Nota: 5</p>
-                    <p><strong>Comentário:</strong> <span th:text="${avaliacao.comentario}">Comentário</span></p>
-                    <p><strong>Autor:</strong> <span th:text="${avaliacao.livro.autor.nome}">Nome do Autor</span></p>
-                    <p><strong>Editora:</strong> <span th:text="${avaliacao.livro.editora.nome}">Nome da Editora</span></p>
-                    <a href="https://www.exemplo.com" class="custom-button" >
-                        <img src="/image/lapis.png" alt="Editar" style="width: 20px; height: 20px; margin-left: 190px">
-                    </a>
-                </div>
-            </div>
-        </div>
-        <!-- Fim do loop -->
-    </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<h1>Atualizar Livro</h1>
+
+
+<!-- A URL de ação agora utiliza a sintaxe do Thymeleaf -->
+<form th:action="@{/api/livro/atualizar/{id}(id=${livro.id})}" method="post">
+    <input type="hidden" name="id" th:value="${livro.id}" /> <!-- ID do livro -->
+
+    <label>Nome:</label>
+    <input type="text" name="nome" th:value="${livro.nome}" required />
+
+    <label>Data de Publicação:</label>
+    <input type="date" name="data_publicacao" th:value="${livro.data_publicacao}" required />
+
+    <label>Descrição:</label>
+    <textarea name="descricao" required th:text="${livro.descricao}"></textarea>
+
+    <label>Número de Páginas:</label>
+    <input type="number" name="numero_paginas" th:value="${livro.numero_paginas}" required />
+
+    <label>URL da Foto:</label>
+    <input type="text" name="urlFoto" th:value="${livro.url_foto}" />
+
+    <label>Autor:</label>
+    <select name="idAutor" required>
+        <option value="" disabled>Selecione o autor</option>
+        <th:block th:each="autor : ${autores}">
+            <option th:value="${autor.id}"
+                    th:text="${autor.nome}"
+                    th:selected="${livro.autor.id == autor.id}"></option>
+        </th:block>
+    </select>
+
+    <label>Editora:</label>
+    <select name="idEditora" required>
+        <option value="" disabled>Selecione a editora</option>
+        <th:block th:each="editora : ${editoras}">
+            <option th:value="${editora.id}"
+                    th:text="${editora.nome}"
+                    th:selected="${livro.editora.id == editora.id}"></option>
+        </th:block>
+    </select>
+
+    <button type="submit">Atualizar Livro</button>
+</form>
+
+<a href="/api/consultar">Voltar</a>
+
 </body>
 </html>

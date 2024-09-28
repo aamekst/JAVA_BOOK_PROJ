@@ -15,4 +15,5 @@ public interface LivroServiceInterface {
 
     List<LivroEntity> buscarPorNome(String nome);
 
+    LivroResponseDto atualizar(Integer id, LivroRequestDto livroRequestDto);
 }
