@@ -3,15 +3,13 @@
 <head>
     <title>Atualizar Livro</title>
 
-    <link rel="stylesheet" href="/consultalivro.css">
+    <link rel="stylesheet" href="/atualizalivro.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: #f3fcee">
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F9E1DD;">
-    <a class="navbar-brand navbar-brand-custom" href="/api/home" style="font-family: 'Stora'; color: white;  letter-spacing: 3px;  text-shadow: -1px -1px 0 #ee5e5b,
-        2px -2px 0 #ee5e5b,
-        -2px 2px 0 #ee5e5b,
-        2px 2px 0 #ee5e5b;">BookCASE</a>
+    <a class="navbar-brand navbar-brand-custom" href="/api/home" style="font-family: 'Stora'; color: white; letter-spacing: 3px; text-shadow: -1px -1px 0 #ee5e5b,
+        2px -2px 0 #ee5e5b, -2px 2px 0 #ee5e5b, 2px 2px 0 #ee5e5b;">BookCASE</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -20,9 +18,7 @@
             <a class="nav-item nav-link" href="/api/avaliacao" style="font-family: 'rolner'; color: #3D5C30">Avaliações</a>
             <a class="nav-item nav-link" href="/api/consultar" style="font-family: 'rolner'; color: #3D5C30">Livros</a>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family: 'rolner'; color: #3D5C30">
-                    Cadastrar
-                </a>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family: 'rolner'; color: #3D5C30">Cadastrar</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="font-family: 'rolner'; color: #3D5C30">
                     <a class="dropdown-item" href="/api/livros/cadastrar" style="font-family: 'rolner'; color: #3D5C30">Livro</a>
                     <a class="dropdown-item" href="/api/cadastrar" style="font-family: 'rolner'; color: #3D5C30">Avaliação</a>
@@ -37,52 +33,81 @@
     </form>
 </nav>
 
-<h1>Atualizar Livro</h1>
+<div>
+    <h1 style="font-family: 'Stora'; color: #EE5E5B; text-align: center; margin-top: 50px;">Atualizar Livro</h1>
+</div>
 
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <!-- A URL de ação agora utiliza a sintaxe do Thymeleaf -->
+            <form th:action="@{/api/livro/atualizar/{id}(id=${livro.id})}" method="post" onsubmit="return mostrarAlerta()">
+                <input type="hidden" name="id" th:value="${livro.id}" /> <!-- ID do livro -->
 
-<!-- A URL de ação agora utiliza a sintaxe do Thymeleaf -->
-<form th:action="@{/api/livro/atualizar/{id}(id=${livro.id})}" method="post">
-    <input type="hidden" name="id" th:value="${livro.id}" /> <!-- ID do livro -->
+                <div class="form-group">
+                    <label>Nome:</label>
+                    <input type="text" class="form-control" name="nome" th:value="${livro.nome}" required />
+                </div>
 
-    <label>Nome:</label>
-    <input type="text" name="nome" th:value="${livro.nome}" required />
+                <div class="form-group">
+                    <label>Data de Publicação:</label>
+                    <input type="date" class="form-control" name="data_publicacao" th:value="${livro.data_publicacao}" required />
+                </div>
 
-    <label>Data de Publicação:</label>
-    <input type="date" name="data_publicacao" th:value="${livro.data_publicacao}" required />
+                <div class="form-group">
+                    <label>Descrição:</label>
+                    <textarea class="form-control" name="descricao" required th:text="${livro.descricao}"></textarea>
+                </div>
 
-    <label>Descrição:</label>
-    <textarea name="descricao" required th:text="${livro.descricao}"></textarea>
+                <div class="form-group">
+                    <label>Número de Páginas:</label>
+                    <input type="number" class="form-control" name="numero_paginas" th:value="${livro.numero_paginas}" required />
+                </div>
 
-    <label>Número de Páginas:</label>
-    <input type="number" name="numero_paginas" th:value="${livro.numero_paginas}" required />
+                <div class="form-group">
+                    <label>URL da Foto:</label>
+                    <input type="text" class="form-control" name="urlFoto" th:value="${livro.url_foto}" />
+                </div>
 
-    <label>URL da Foto:</label>
-    <input type="text" name="urlFoto" th:value="${livro.url_foto}" />
+                <div class="form-group">
+                    <label>Autor:</label>
+                    <select class="form-control" name="idAutor" required>
+                        <option value="" disabled>Selecione o autor</option>
+                        <th:block th:each="autor : ${autores}">
+                            <option th:value="${autor.id}" th:text="${autor.nome}" th:selected="${livro.autor.id == autor.id}"></option>
+                        </th:block>
+                    </select>
+                </div>
 
-    <label>Autor:</label>
-    <select name="idAutor" required>
-        <option value="" disabled>Selecione o autor</option>
-        <th:block th:each="autor : ${autores}">
-            <option th:value="${autor.id}"
-                    th:text="${autor.nome}"
-                    th:selected="${livro.autor.id == autor.id}"></option>
-        </th:block>
-    </select>
+                <div class="form-group">
+                    <label>Editora:</label>
+                    <select class="form-control" name="idEditora" required>
+                        <option value="" disabled>Selecione a editora</option>
+                        <th:block th:each="editora : ${editoras}">
+                            <option th:value="${editora.id}" th:text="${editora.nome}" th:selected="${livro.editora.id == editora.id}"></option>
+                        </th:block>
+                    </select>
+                </div>
 
-    <label>Editora:</label>
-    <select name="idEditora" required>
-        <option value="" disabled>Selecione a editora</option>
-        <th:block th:each="editora : ${editoras}">
-            <option th:value="${editora.id}"
-                    th:text="${editora.nome}"
-                    th:selected="${livro.editora.id == editora.id}"></option>
-        </th:block>
-    </select>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary" style="background: #ee5e5b">Atualizar Livro</button>
+                    <a href="/api/consultar" class="btn btn-secondary" style="margin-left: 20px;">Voltar</a>
+                </div>
+            </form>
 
-    <button type="submit">Atualizar Livro</button>
-</form>
+            <script>
+                function mostrarAlerta() {
+                    alert('Livro atualizado com sucesso!');
+                    return true; // Continua o envio do formulário após o alerta
+                }
+            </script>
+        </div>
+    </div>
+</div>
 
-<a href="/api/consultar">Voltar</a>
-
+<!-- Scripts do Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

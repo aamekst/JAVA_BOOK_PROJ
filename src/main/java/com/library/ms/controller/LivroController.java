@@ -120,7 +120,7 @@ public class LivroController {
         livroRequestDto.setId(id); // Define o ID do DTO a partir do PathVariable
         try {
             livroServiceInterface.atualizar(id, livroRequestDto); // Chama o método de atualização
-            return "redirect:/api/consultar"; // Redireciona para a página de consulta
+            return "redirect:/api/consultar";
         } catch (RuntimeException e) {
             return "redirect:/api/consultar?erro=" + e.getMessage(); // Redireciona com mensagem de erro
         }
