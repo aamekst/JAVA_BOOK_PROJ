@@ -55,8 +55,17 @@ public class AvaliacaoController {
         return "avaliacao"; // Nome do template Thymeleaf
     }
 
+    @GetMapping("/buscarporlivro")
+    public String buscarAvaliacoesPorLivro(@RequestParam String nome, Model model) {
+        // Busca as avaliações associadas ao livro pelo nome
+        List<AvaliacaoEntity> avaliacoes = avaliacaoService.buscarAvaliacoesPorLivro(nome);
 
+        // Passa as avaliações e o nome do livro para o template
+        model.addAttribute("avaliacoes", avaliacoes);
+        model.addAttribute("nomeLivro", nome);
 
-
+        // Retorna o nome da página HTML para exibir as avaliações
+        return "avaliacao";  // O nome do arquivo Thymeleaf (por exemplo, buscarAvaliacoes.html)
+    }
 
 }

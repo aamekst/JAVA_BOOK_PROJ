@@ -28,4 +28,12 @@ public class AvaliacaoServiceImpl implements AvaliacaoServiceInterface {
         return avaliacaoRepository.findAll(); // Método para listar todas as avaliações
     }
 
+    @Override
+    public List<AvaliacaoEntity> buscarPorNomeDeLivro(String nome) {
+        return List.of();
+    }
+
+    public List<AvaliacaoEntity> buscarAvaliacoesPorLivro(String nomeLivro) {
+        return avaliacaoRepository.findByLivro_NomeContainingIgnoreCase(nomeLivro);  // Busca usando LIKE no nome
+    }
 }
