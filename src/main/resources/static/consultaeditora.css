@@ -1,0 +1,84 @@
+/* Fontes personalizadas */
+@font-face {
+    font-family: 'Magic Retro';
+    src: url('/fonts/magic/Magic_Retro.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Stora';
+    src: url('/fonts/stora/Stora.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'rolner';
+    src: url('/fonts/rolner/ROLNER.otf') format('opentype');
+}
+
+/* Estilo para os cards */
+.avaliacao-card {
+    width: 250px; /* Define a largura dos cards */
+    margin-top: 20px;
+    margin-left: 40px;
+    border:3px solid #3D5C30;
+    background-color #white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra do card */
+    justify-content: space-around;
+    transition: transform 0.3s ease-in-out; /* Transição mais suave ao aplicar o efeito hover */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: 'rolner';
+    align-items: center; /* Centraliza o conteúdo do card */
+}
+
+.avaliacao-card:hover {
+    transform: scale(1.05); /* Efeito de aumentar o card no hover */
+}
+
+.avaliacao-card img {
+    width: 50%;
+    height: 100px; /* Ajusta a altura da imagem */
+    object-fit: cover; /* Garante que a imagem ocupe toda a área */
+}
+
+.avaliacao-card .card-body {
+    padding: 15px;
+    text-align: left; /* Centraliza o texto dentro do card */
+    color: white;
+}
+
+.avaliacao-card h3 {
+    margin-top: 0;
+    font-size: 1.2rem; /* Ajusta o tamanho do texto */
+}
+
+.avaliacao-card p {
+    margin: 5px 0;
+}
+
+
+/* Título do header */
+.header-title {
+    font-family: 'Stora', sans-serif;
+    color: #3D5C30;
+    text-align: left;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* Estilo do contêiner dos cards */
+.container {
+    padding-top: 10px;
+    background: #white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra do contêiner */
+    margin: 20px;
+    border: 3px solid #3D5C30;
+    display: flex; /* Adiciona o layout flexível */
+    flex-wrap: wrap; /* Permite que os cards se ajustem e quebrem a linha */
+    justify-content: center; /* Centraliza os cards horizontalmente */
+    gap:10px; /* Adiciona espaçamento entre os cards */
+}
