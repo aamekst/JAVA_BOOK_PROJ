@@ -14,4 +14,7 @@ public interface AutorServiceInterface {
 
     List<AutorEntity> listarTodosAutores();
 
+    List<AutorEntity> listarAutores();
+
+    String excluirAutor(Integer id);
 }

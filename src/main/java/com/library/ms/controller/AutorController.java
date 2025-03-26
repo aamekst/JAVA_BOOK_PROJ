@@ -9,15 +9,16 @@ import com.library.ms.domain.entity.LivroEntity;
 import com.library.ms.domain.service.AutorServiceInterface;
 import com.library.ms.domain.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/api")
@@ -61,6 +62,19 @@ public class AutorController {
             model.addAttribute("erro", "Erro ao listar autores: " + e.getMessage());
             return "home"; // Retorna a mesma página com a mensagem de erro
         }
+    }
+
+
+
+    @PostMapping("/autor/{id}")
+    public String excluirAutor(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        String mensagem = autorService.excluirAutor(id);
+
+        // Adiciona a mensagem de sucesso/erro
+        redirectAttributes.addFlashAttribute("mensagem", mensagem);
+
+        // Redireciona de volta para a página de autores
+        return "redirect:/api/consultar/autor";
     }
 
 }

@@ -1,5 +1,6 @@
 package com.library.ms.domain.repository;
 
+import com.library.ms.domain.entity.AutorEntity;
 import com.library.ms.domain.entity.LivroEntity;
 import com.library.ms.domain.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,4 +24,6 @@ public interface LivroRepository<Livro> extends JpaRepository<LivroEntity, Integ
 
     boolean existsByNomeAndAutorId(String nome, Integer idAutor);
 
+
+    long countByAutor(AutorEntity autor);
 }
