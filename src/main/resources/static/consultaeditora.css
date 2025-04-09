@@ -82,3 +82,18 @@
     justify-content: center; /* Centraliza os cards horizontalmente */
     gap:10px; /* Adiciona espaçamento entre os cards */
 }
+
+.custom-btn {
+    background-color: white;
+    color: #638A53;
+    border: 1px solid #638A53;
+    float: right; /* Alinha para a direita */
+    margin-top: 10px; /* Espaço do texto acima */
+}
+
+.custom-btn:hover {
+    background-color: #638A53;
+    color: white;
+    transition: 0.3s;
+}
+

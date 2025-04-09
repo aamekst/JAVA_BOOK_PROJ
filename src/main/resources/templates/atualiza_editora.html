@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Atualizar Editora</title>
+
+    <link rel="stylesheet" href="/consultaeditora.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color: #f3fcee">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F9E1DD;">
+    <a class="navbar-brand navbar-brand-custom" href="/api/home" style="font-family: 'Stora'; color: white; letter-spacing: 3px; text-shadow: -1px -1px 0 #ee5e5b,
+        2px -2px 0 #ee5e5b, -2px 2px 0 #ee5e5b, 2px 2px 0 #ee5e5b;">BookCASE</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/api/avaliacao" style="font-family: 'rolner'; color: #3D5C30">Avaliações</a>
+            <a class="nav-item nav-link" href="/api/consultar" style="font-family: 'rolner'; color: #3D5C30">Livros</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family: 'rolner'; color: #3D5C30">Cadastrar</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="font-family: 'rolner'; color: #3D5C30">
+                    <a class="dropdown-item" href="/api/livros/cadastrar" style="font-family: 'rolner'; color: #3D5C30">Livro</a>
+                    <a class="dropdown-item" href="/api/editora/cadastrar" style="font-family: 'rolner'; color: #3D5C30">Editora</a>
+                    <a class="dropdown-item" href="/api/cadastrar" style="font-family: 'rolner'; color: #3D5C30">Avaliação</a>
+                </div>
+            </li>
+        </div>
+    </div>
+    <form class="form-inline my-2 my-lg-0" action="/api/buscarPorNome" method="get">
+        <input class="form-control mr-sm-2" type="search" name="nome" placeholder="Buscar" aria-label="Buscar">
+        <button class="btn btn-outline-success my-2 my-sm-0" style="background-color: #3D5C30; color: white" type="submit">Buscar</button>
+    </form>
+</nav>
+
+<div class="container" style="background: #F9E1DD; border: 2px solid #EE5E5B">
+    <div>
+        <h1 class="mb-4" style="font-family: 'Stora'; color: #EE5E5B; text-align: center; margin-top: 30px;">Atualizar Editora</h1>
+
+    </div></div>
+<div class="container mt-5" style="font-family: 'rolner'; border: 2px solid #EE5E5B;">
+    <div class="card">
+        <div class="card-body" style="width: 1100px; height: 200px; margin-bottom: 10px">
+            <form th:action="@{/api/editar/{id}(id=${idEditora})}" method="post" onsubmit="return mostrarAlerta()">
+                <input type="hidden" name="id" th:value="${idEditora}" />
+
+                <div class="form-group">
+                    <label>Nome da Editora:</label>
+                    <input type="text" class="form-control" name="nome" th:value="${editoraRequestDto.nome}" required />
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary" style="background: #ee5e5b">Atualizar Editora</button>
+                </div>
+            </form>
+
+            <script>
+                function mostrarAlerta() {
+                    alert('Editora atualizada com sucesso!');
+                    return true;
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts do Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

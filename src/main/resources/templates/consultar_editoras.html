@@ -41,16 +41,29 @@
 <div class="container" style="background: white;">
 
     <div class="row">
-        <!-- Loop para exibir autores -->
         <div th:each="editora : ${editoras}" class="col-md-4 mb-4">
-            <div class="avaliacao-card card" style="background: #638a53;" >
-                <div class="card-body">
-                    <h3 th:text="${editora.nome}">Nome da Editora</h3>
+            <div class="avaliacao-card card" style="background: #638a53; height: 100px; display: flex; flex-direction: column; justify-content: space-between; padding: 0.5rem;">
+                <div class="card-body" style="flex-grow: 0; padding: 0;">
+                    <h3 th:text="${editora.nome}" style="color: white; margin: 0;">Nome da Editora</h3>
+                </div>
+                <div style="text-align: right; padding: 0;">
+                    <a th:href="@{/api/editora/atualizar(id=${editora.id})}"
+                       class="btn custom-btn btn-sm"
+                       style="background: white;">
+                        Editar
+                    </a>
                 </div>
             </div>
         </div>
-        <!-- Fim do loop -->
     </div>
+
+
+    <!-- Fim do loop -->
+</div>
+
+
+
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

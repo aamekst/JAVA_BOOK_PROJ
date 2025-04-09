@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EditoraServiceImpl implements EditoraServiceInterface {
@@ -32,6 +33,27 @@ public class EditoraServiceImpl implements EditoraServiceInterface {
     @Override
     public List<EditoraEntity> listarTodosEditoras() {
         return editoraRepository.findAll();
+    }
+
+    @Override
+    public EditoraResponseDto atualizar(Integer id, EditoraRequestDto editoraRequestDto) {
+        if (id == null) {
+            throw new IllegalArgumentException("O ID da editora não pode ser nulo.");
+        }
+
+        EditoraEntity exist = editoraRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Editora não encontrada com o ID: " + id));
+
+        exist.setNome(editoraRequestDto.getNome());
+
+        EditoraEntity savedEditora = editoraRepository.save(exist);
+
+        return new EditoraResponseDto(savedEditora.getId(), savedEditora.getNome());
+    }
+
+    @Override
+    public EditoraEntity buscarPorId(Integer id) {
+        return editoraRepository.findById(id).orElse(null);
     }
 
 

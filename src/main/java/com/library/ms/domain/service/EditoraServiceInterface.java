@@ -13,4 +13,9 @@ import java.util.List;
 public interface EditoraServiceInterface {
     EditoraResponseDto save(EditoraRequestDto editoraRequestDto);
 
-    List<EditoraEntity> listarTodosEditoras();}
+    List<EditoraEntity> listarTodosEditoras();
+
+    EditoraResponseDto atualizar(Integer id, EditoraRequestDto editoraRequestDto);
+
+    EditoraEntity buscarPorId(Integer id);
+}

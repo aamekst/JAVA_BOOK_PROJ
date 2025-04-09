@@ -6,10 +6,7 @@ import com.library.ms.domain.service.EditoraServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -57,5 +54,34 @@ public class EditoraController {
             return "home"; // Retorna a mesma página com a mensagem de erro
         }
     }
+
+    // Exibe o formulário de edição da editora
+    @GetMapping("/editora/atualizar")
+    public String atualizarEditora(@RequestParam Integer id, Model model) {
+        EditoraEntity editora = editoraService.buscarPorId(id);
+
+        EditoraRequestDto dto = new EditoraRequestDto();
+        dto.setNome(editora.getNome());
+
+        model.addAttribute("idEditora", editora.getId());
+        model.addAttribute("editoraRequestDto", dto);
+
+        return "atualiza_editora";
+    }
+
+    // Processa o formulário de atualização
+    @PostMapping("/editar/{id}")
+    public String atualizar(@PathVariable Integer id,
+                            @ModelAttribute EditoraRequestDto dto,
+                            RedirectAttributes redirect) {
+        try {
+            editoraService.atualizar(id, dto);
+            redirect.addFlashAttribute("mensagem", "Editora atualizada com sucesso!");
+        } catch (Exception e) {
+            redirect.addFlashAttribute("erro", "Erro ao atualizar: " + e.getMessage());
+        }
+        return "redirect:/api/consultar/editora";
+    }
+
 
 }
