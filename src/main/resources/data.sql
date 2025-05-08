@@ -12,9 +12,9 @@ CREATE TABLE Editora(
 
 CREATE TABLE Usuario(
 	Id INT IDENTITY(1,1),
-	Nome varchar(50) NOT NULL,
+	username varchar(50) NOT NULL,
 	email varchar(255) NOT NULL,
-	senha varchar(20) NOT NULL,
+	senha varchar(255) NOT NULL,
 
 	PRIMARY KEY (Id)
 );

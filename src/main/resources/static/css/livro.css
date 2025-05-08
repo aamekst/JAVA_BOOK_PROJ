@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Magic Retro';
+    src: url('/fonts/magic/Magic_Retro.ttf') format('truetype');
+}
+
+/* Para a fonte Stora Light */
+@font-face {
+    font-family: 'Stora';
+    src: url('/fonts/stora/Stora.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'rolner';
+    src: url('/fonts/rolner/ROLNER.otf') format('opentype');
+}
+
+body {
+    background: #f3fcee; /* Define a cor de fundo da página */
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave ao card */
+    border-radius: 10px; /* Adiciona bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
+    background-color: #ffffff; /* Fundo branco para o card */
+    margin: 20px 0; /* Espaçamento entre os cards */
+}
+
+.content-right img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-left: 800px
+    border-radius: 8px; /* Arredonda as bordas da imagem */
+}
+
